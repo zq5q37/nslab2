@@ -45,7 +45,7 @@ def tuple_to_bytes(x):
     Helper function to convert a tuple of integers into bytes
     """
     return int.from_bytes(list(x), byteorder="big").to_bytes(
-        4, byteorder="big"
+        3, byteorder="big"
     )
 
 
@@ -58,8 +58,6 @@ def bytes_to_col(x, length, top_down=False):
     x = int.from_bytes(x[::-1], byteorder="big")
     for _ in range(length):
         pixel = []
-        # Discard fake alpha value
-        x >>= 8
         for _ in range(3):
             if top_down:
                 pixel.append(x & 0xFF)
